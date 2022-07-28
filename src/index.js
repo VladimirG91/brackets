@@ -1,23 +1,14 @@
 module.exports = function check(str, bracketsConfig) {
-  const obj = {}
-  bracketsConfig.forEach((pair) => (obj[pair[1]] = pair[0]))
-  let values = Object.values(obj)
-  let stack = []
-  for (let i = 0; i < str.length; i++) {
-    let currentElement = str[i]
-    if (values.includes(currentElement)) {
-      stack.push(currentElement)
-    } else {
-      if (stack.length === 0) {
-        return false
-      }
-      let topElement = stack[stack.length - 1]
-      if (obj[currentElement] === topElement) {
-        stack.pop()
-      } else {
-        return false
-      }
-    }
+  let arr = bracketsConfig
+    .flat(1)
+    .join('')
+    .match(/.{1,2}/g)
+  for (let i = 0; i < str.length + 40; i++) {
+    ;(str = str.replace(arr[0], '')) &&
+      (str = str.replace(arr[1], '')) &&
+      (str = str.replace(arr[2], '')) &&
+      (str = str.replace(arr[3], '')) &&
+      (str = str.replace(arr[4], ''))
   }
-  return stack.length === 0
+  return str.length === 0
 }
